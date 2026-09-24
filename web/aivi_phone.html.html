@@ -1,0 +1,1839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0">
+
+<title>AIVI 💗</title>
+
+<style>
+
+/* =========================================================
+   AIVI — PHASE 1
+   CHARACTER / ANIMATION ENGINE
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+:root {
+    --pink: #ff55b8;
+    --pink2: #ff9ddd;
+    --purple: #8b6cff;
+    --blue: #55d9ff;
+    --glass: rgba(255,255,255,.10);
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+
+    font-family:
+        "Segoe UI",
+        Arial,
+        sans-serif;
+
+    color: white;
+
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            #32236d 0%,
+            #171b46 32%,
+            #090d24 70%,
+            #03050e 100%
+        );
+}
+
+
+/* =========================================================
+   BACKGROUND
+   ========================================================= */
+
+.background-glow {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle at 20% 30%,
+            rgba(255,80,190,.18),
+            transparent 25%
+        ),
+        radial-gradient(
+            circle at 80% 60%,
+            rgba(70,170,255,.16),
+            transparent 28%
+        );
+}
+
+.stars {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+.star {
+    position: absolute;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+
+    background: white;
+
+    opacity: .4;
+
+    animation:
+        twinkle 3s infinite ease-in-out;
+}
+
+@keyframes twinkle {
+
+    0%,100% {
+        opacity: .15;
+        transform: scale(.7);
+    }
+
+    50% {
+        opacity: .9;
+        transform: scale(1.5);
+    }
+}
+
+
+/* =========================================================
+   MAIN
+   ========================================================= */
+
+.container {
+
+    width: 100%;
+    max-width: 1100px;
+
+    min-height: 100vh;
+
+    margin: auto;
+
+    padding:
+        28px
+        28px
+        40px;
+
+    position: relative;
+}
+
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+
+.header {
+
+    display: flex;
+
+    justify-content:
+        space-between;
+
+    align-items: center;
+
+    position: relative;
+
+    z-index: 10;
+}
+
+.logo {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 12px;
+}
+
+.logo-icon {
+
+    width: 52px;
+    height: 52px;
+
+    border-radius: 17px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-size: 27px;
+
+    background:
+        linear-gradient(
+            135deg,
+            #8d68ff,
+            #ff62bd,
+            #43dfff
+        );
+
+    box-shadow:
+        0 0 30px
+        rgba(130,100,255,.45);
+}
+
+.logo-name {
+
+    font-size: 30px;
+
+    font-weight: 800;
+
+    letter-spacing: 4px;
+}
+
+.logo-sub {
+
+    font-size: 11px;
+
+    color: #b8b7d8;
+
+    letter-spacing: 3px;
+
+    margin-top: 3px;
+}
+
+.status {
+
+    padding:
+        11px
+        18px;
+
+    border-radius: 25px;
+
+    background:
+        rgba(255,255,255,.07);
+
+    border:
+        1px solid
+        rgba(255,255,255,.13);
+
+    backdrop-filter:
+        blur(15px);
+
+    color: #9fffd2;
+}
+
+.status-dot {
+
+    display: inline-block;
+
+    width: 9px;
+    height: 9px;
+
+    margin-right: 7px;
+
+    border-radius: 50%;
+
+    background: #4dff9d;
+
+    box-shadow:
+        0 0 15px
+        #4dff9d;
+}
+
+
+/* =========================================================
+   CHARACTER AREA
+   ========================================================= */
+
+.stage {
+
+    min-height:
+        calc(100vh - 140px);
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    position: relative;
+}
+
+
+/* =========================================================
+   FLOATING HEARTS
+   ========================================================= */
+
+.heart {
+
+    position: absolute;
+
+    color: var(--pink);
+
+    font-size: 25px;
+
+    filter:
+        drop-shadow(
+            0 0 12px
+            rgba(255,70,190,.8)
+        );
+
+    animation:
+        floatHeart
+        5s
+        infinite
+        ease-in-out;
+}
+
+.h1 {
+    left: 15%;
+    top: 25%;
+}
+
+.h2 {
+    right: 15%;
+    top: 20%;
+
+    animation-delay: 1.5s;
+}
+
+.h3 {
+    right: 22%;
+    bottom: 25%;
+
+    animation-delay: 3s;
+}
+
+@keyframes floatHeart {
+
+    0%,100% {
+        transform:
+            translateY(0)
+            rotate(-8deg);
+
+        opacity: .3;
+    }
+
+    50% {
+        transform:
+            translateY(-35px)
+            rotate(8deg);
+
+        opacity: 1;
+    }
+}
+
+
+/* =========================================================
+   AIVI
+   ========================================================= */
+
+.aivi {
+
+    width: 420px;
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    animation:
+        idleBody
+        4s
+        infinite
+        ease-in-out;
+}
+
+@keyframes idleBody {
+
+    0%,100% {
+        transform:
+            translateY(0)
+            rotate(0deg);
+    }
+
+    50% {
+        transform:
+            translateY(-8px)
+            rotate(.5deg);
+    }
+}
+
+
+/* =========================================================
+   HAIR
+   ========================================================= */
+
+.hair {
+
+    position: absolute;
+
+    width: 320px;
+    height: 350px;
+
+    top: 35px;
+
+    border-radius:
+        48%
+        48%
+        42%
+        42%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #fff5ff,
+            #f6d7f2 35%,
+            #d6aee8 75%,
+            #9d72d1
+        );
+
+    box-shadow:
+
+        inset
+        -25px
+        -25px
+        45px
+        rgba(111,50,140,.25),
+
+        0 0 50px
+        rgba(255,160,240,.22);
+
+    z-index: 1;
+}
+
+.hair::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 180px;
+    height: 100px;
+
+    left: 60px;
+    top: -15px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            180deg,
+            #fffaff,
+            #e7c6ec
+        );
+
+    transform:
+        rotate(-8deg);
+}
+
+
+/* =========================================================
+   FACE
+   ========================================================= */
+
+.head {
+
+    width: 270px;
+    height: 285px;
+
+    position: relative;
+
+    z-index: 4;
+
+    border-radius:
+        45%
+        45%
+        43%
+        43%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffdfd,
+            #ffe8f7 45%,
+            #f1c9e9
+        );
+
+    box-shadow:
+
+        inset
+        -18px
+        -22px
+        40px
+        rgba(190,100,180,.20),
+
+        0 25px
+        50px
+        rgba(0,0,0,.35);
+}
+
+
+/* =========================================================
+   FACE SCREEN
+   ========================================================= */
+
+.face {
+
+    position: absolute;
+
+    left: 25px;
+    right: 25px;
+
+    top: 28px;
+
+    height: 190px;
+
+    border-radius: 45%;
+
+    background:
+        radial-gradient(
+            circle at 50% 40%,
+            #25205c,
+            #0a0b25 70%
+        );
+
+    box-shadow:
+
+        inset
+        0 0 30px
+        rgba(80,100,255,.35),
+
+        0 0 30px
+        rgba(80,120,255,.25);
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   EYES
+   ========================================================= */
+
+.eye {
+
+    position: absolute;
+
+    width: 58px;
+    height: 72px;
+
+    top: 55px;
+
+    border-radius: 50%;
+
+    background:
+        radial-gradient(
+            circle at 50% 35%,
+            #ffffff 0 8%,
+            #b89aff 20%,
+            #6849d8 50%,
+            #22144c 75%
+        );
+
+    box-shadow:
+        0 0 22px
+        rgba(150,110,255,.8);
+
+    transition:
+        .2s ease;
+}
+
+.eye.left {
+    left: 43px;
+}
+
+.eye.right {
+    right: 43px;
+}
+
+
+/* eyelashes */
+
+.eye::before {
+
+    content: "";
+
+    position: absolute;
+
+    width: 62px;
+    height: 15px;
+
+    top: -8px;
+    left: -2px;
+
+    border-top:
+        4px solid
+        #301947;
+
+    border-radius: 50%;
+}
+
+
+/* =========================================================
+   BLINK
+   ========================================================= */
+
+.blink .eye {
+
+    height: 8px;
+
+    top: 87px;
+
+    border-radius: 50%;
+
+    background:
+        #ffb7df;
+
+    box-shadow: none;
+}
+
+
+/* =========================================================
+   MOUTH
+   ========================================================= */
+
+.mouth {
+
+    position: absolute;
+
+    width: 45px;
+    height: 22px;
+
+    left: 50%;
+    bottom: 42px;
+
+    transform:
+        translateX(-50%);
+
+    border-bottom:
+        5px solid
+        #ff69b7;
+
+    border-radius:
+        0 0 50px 50px;
+
+    transition: .2s;
+}
+
+.happy .mouth {
+
+    width: 55px;
+    height: 28px;
+
+    border-bottom-width: 7px;
+}
+
+.sad .mouth {
+
+    border-bottom: none;
+
+    border-top:
+        5px solid
+        #ff69b7;
+
+    border-radius:
+        50px 50px 0 0;
+}
+
+.surprised .mouth {
+
+    width: 28px;
+    height: 32px;
+
+    border:
+        4px solid
+        #ff69b7;
+
+    border-radius: 50%;
+}
+
+
+/* =========================================================
+   BLUSH
+   ========================================================= */
+
+.blush {
+
+    position: absolute;
+
+    width: 45px;
+    height: 18px;
+
+    top: 122px;
+
+    border-radius: 50%;
+
+    background:
+        rgba(255,100,180,.35);
+
+    filter:
+        blur(5px);
+}
+
+.blush.left {
+    left: 25px;
+}
+
+.blush.right {
+    right: 25px;
+}
+
+
+/* =========================================================
+   HEART EARS
+   ========================================================= */
+
+.ear {
+
+    position: absolute;
+
+    width: 90px;
+    height: 105px;
+
+    top: -30px;
+
+    z-index: 5;
+
+    border-radius:
+        55%
+        45%
+        45%
+        45%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff8ff,
+            #ffc9ed
+        );
+
+    box-shadow:
+
+        inset
+        0 0 25px
+        rgba(255,110,205,.35),
+
+        0 0 25px
+        rgba(255,130,220,.45);
+
+    transition:
+        transform
+        .25s
+        ease;
+}
+
+.ear.left {
+
+    left: 30px;
+
+    transform:
+        rotate(-25deg);
+}
+
+.ear.right {
+
+    right: 30px;
+
+    transform:
+        rotate(25deg);
+}
+
+.ear::after {
+
+    content: "♥";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    color: #ff5eb8;
+
+    font-size: 30px;
+
+    text-shadow:
+        0 0 15px
+        #ff5eb8;
+}
+
+.ears-wiggle .ear.left {
+
+    transform:
+        rotate(-40deg)
+        translateY(-8px);
+}
+
+.ears-wiggle .ear.right {
+
+    transform:
+        rotate(40deg)
+        translateY(-8px);
+}
+
+
+/* =========================================================
+   BODY
+   ========================================================= */
+
+.body {
+
+    width: 230px;
+    height: 230px;
+
+    position: relative;
+
+    z-index: 3;
+
+    margin-top: -10px;
+
+    border-radius:
+        42%
+        42%
+        30%
+        30%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fffdfd,
+            #f6d9ef 60%,
+            #d7b5e6
+        );
+
+    box-shadow:
+
+        inset
+        -15px
+        -20px
+        35px
+        rgba(160,80,160,.18),
+
+        0 20px
+        45px
+        rgba(0,0,0,.35);
+}
+
+
+/* =========================================================
+   CHEST HEART
+   ========================================================= */
+
+.chest-heart {
+
+    position: absolute;
+
+    left: 50%;
+    top: 55px;
+
+    transform:
+        translateX(-50%);
+
+    font-size: 40px;
+
+    color: #ff58b5;
+
+    text-shadow:
+        0 0 18px
+        #ff58b5;
+
+    animation:
+        heartBeat
+        2s
+        infinite;
+}
+
+@keyframes heartBeat {
+
+    0%,100% {
+        transform:
+            translateX(-50%)
+            scale(1);
+    }
+
+    50% {
+        transform:
+            translateX(-50%)
+            scale(1.15);
+    }
+}
+
+
+/* =========================================================
+   ARMS
+   ========================================================= */
+
+.arm {
+
+    position: absolute;
+
+    width: 75px;
+    height: 155px;
+
+    top: 25px;
+
+    border-radius: 50px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff,
+            #e9c9e9
+        );
+
+    box-shadow:
+        0 15px 30px
+        rgba(0,0,0,.25);
+
+    transform-origin:
+        50% 15%;
+}
+
+.arm.left {
+
+    left: -55px;
+
+    transform:
+        rotate(18deg);
+}
+
+.arm.right {
+
+    right: -55px;
+
+    transform:
+        rotate(-18deg);
+}
+
+.hand {
+
+    position: absolute;
+
+    width: 70px;
+    height: 55px;
+
+    bottom: -25px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff,
+            #e6d0e9
+        );
+}
+
+.arm.left .hand {
+    left: -2px;
+}
+
+.arm.right .hand {
+    right: -2px;
+}
+
+
+/* waving */
+
+.wave .arm.left {
+
+    animation:
+        waveLeft
+        .6s
+        infinite
+        alternate;
+}
+
+.wave .arm.right {
+
+    animation:
+        waveRight
+        .6s
+        infinite
+        alternate;
+}
+
+@keyframes waveLeft {
+
+    from {
+        transform:
+            rotate(15deg);
+    }
+
+    to {
+        transform:
+            rotate(-35deg);
+    }
+}
+
+@keyframes waveRight {
+
+    from {
+        transform:
+            rotate(-15deg);
+    }
+
+    to {
+        transform:
+            rotate(35deg);
+    }
+}
+
+
+/* =========================================================
+   HEART HAND POSE
+   ========================================================= */
+
+.heart-pose .arm.left {
+
+    transform:
+        rotate(-55deg)
+        translateY(30px);
+}
+
+.heart-pose .arm.right {
+
+    transform:
+        rotate(55deg)
+        translateY(30px);
+}
+
+
+/* =========================================================
+   LEGS
+   ========================================================= */
+
+.leg {
+
+    position: absolute;
+
+    width: 82px;
+    height: 125px;
+
+    bottom: -95px;
+
+    border-radius:
+        30px
+        30px
+        40px
+        40px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff,
+            #e4c9e8
+        );
+}
+
+.leg.left {
+    left: 25px;
+}
+
+.leg.right {
+    right: 25px;
+}
+
+
+/* =========================================================
+   SHOES
+   ========================================================= */
+
+.foot {
+
+    position: absolute;
+
+    width: 100px;
+    height: 55px;
+
+    bottom: -15px;
+
+    border-radius: 50px;
+
+    background:
+        linear-gradient(
+            145deg,
+            #fff,
+            #e5c9eb
+        );
+
+    box-shadow:
+        0 12px 25px
+        rgba(0,0,0,.3);
+}
+
+.leg.left .foot {
+    left: -10px;
+}
+
+.leg.right .foot {
+    right: -10px;
+}
+
+.foot::after {
+
+    content: "♥";
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform:
+        translate(-50%,-50%);
+
+    color: #ff61ba;
+
+    font-size: 22px;
+}
+
+
+/* =========================================================
+   CHARACTER ACTIONS
+   ========================================================= */
+
+.dance {
+
+    animation:
+        dance
+        .8s
+        infinite
+        alternate !important;
+}
+
+@keyframes dance {
+
+    from {
+        transform:
+            translateY(0)
+            rotate(-4deg);
+    }
+
+    to {
+        transform:
+            translateY(-18px)
+            rotate(4deg);
+    }
+}
+
+.sad-mode {
+
+    transform:
+        translateY(15px)
+        rotate(-2deg);
+
+    filter:
+        saturate(.7);
+}
+
+.excited {
+
+    animation:
+        excited
+        .35s
+        infinite
+        alternate !important;
+}
+
+@keyframes excited {
+
+    from {
+        transform:
+            scale(1)
+            rotate(-2deg);
+    }
+
+    to {
+        transform:
+            scale(1.04)
+            rotate(2deg);
+    }
+}
+
+
+/* =========================================================
+   DIALOGUE
+   ========================================================= */
+
+.dialogue {
+
+    position: absolute;
+
+    right: 2%;
+
+    top: 22%;
+
+    width: 270px;
+
+    padding: 25px;
+
+    border-radius: 28px;
+
+    background:
+        linear-gradient(
+            135deg,
+            rgba(255,100,210,.22),
+            rgba(100,80,255,.18)
+        );
+
+    border:
+        1px solid
+        rgba(255,255,255,.18);
+
+    backdrop-filter:
+        blur(18px);
+
+    box-shadow:
+        0 20px 60px
+        rgba(0,0,0,.25);
+}
+
+.dialogue h2 {
+
+    margin:
+        0 0 8px;
+
+    font-size: 22px;
+}
+
+.dialogue p {
+
+    margin: 0;
+
+    color: #d7d3ee;
+
+    line-height: 1.5;
+}
+
+
+/* =========================================================
+   CONTROLS
+   ========================================================= */
+
+.controls {
+
+    position: fixed;
+
+    bottom: 25px;
+
+    left: 50%;
+
+    transform:
+        translateX(-50%);
+
+    display: flex;
+
+    gap: 10px;
+
+    z-index: 20;
+}
+
+.control {
+
+    border: none;
+
+    padding:
+        13px
+        18px;
+
+    border-radius: 30px;
+
+    color: white;
+
+    background:
+        rgba(255,255,255,.10);
+
+    border:
+        1px solid
+        rgba(255,255,255,.15);
+
+    backdrop-filter:
+        blur(15px);
+
+    cursor: pointer;
+
+    transition: .2s;
+}
+
+.control:hover {
+
+    background:
+        rgba(255,100,210,.25);
+
+    transform:
+        translateY(-3px);
+}
+
+.mic {
+
+    width: 62px;
+    height: 62px;
+
+    padding: 0;
+
+    font-size: 25px;
+
+    border-radius: 50%;
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff55b8,
+            #8065ff,
+            #42dfff
+        );
+
+    box-shadow:
+        0 0 35px
+        rgba(160,80,255,.5);
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media(max-width: 800px) {
+
+    .container {
+        padding: 20px 15px;
+    }
+
+    .logo-name {
+        font-size: 24px;
+    }
+
+    .stage {
+        min-height:
+            calc(100vh - 120px);
+    }
+
+    .aivi {
+        transform:
+            scale(.78);
+    }
+
+    .dialogue {
+
+        top: auto;
+        bottom: 120px;
+
+        right: 50%;
+
+        transform:
+            translateX(50%);
+
+        width: 280px;
+    }
+
+    .heart {
+        display: none;
+    }
+
+    .controls {
+        bottom: 15px;
+    }
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="background-glow"></div>
+
+<div class="stars">
+    <span class="star" style="left:10%;top:20%"></span>
+    <span class="star" style="left:20%;top:60%"></span>
+    <span class="star" style="left:35%;top:15%"></span>
+    <span class="star" style="left:70%;top:20%"></span>
+    <span class="star" style="left:85%;top:50%"></span>
+    <span class="star" style="left:60%;top:75%"></span>
+    <span class="star" style="left:90%;top:15%"></span>
+</div>
+
+
+<div class="container">
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div class="logo">
+
+            <div class="logo-icon">
+                🤖
+            </div>
+
+            <div>
+
+                <div class="logo-name">
+                    AIVI 💗
+                </div>
+
+                <div class="logo-sub">
+                    YOUR LITTLE COMPANION
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <div class="status">
+
+            <span class="status-dot"></span>
+
+            ONLINE
+
+        </div>
+
+    </header>
+
+
+    <!-- CHARACTER STAGE -->
+
+    <main class="stage">
+
+
+        <div class="heart h1">♥</div>
+        <div class="heart h2">♥</div>
+        <div class="heart h3">♥</div>
+
+
+        <!-- ==============================
+             AIVI CHARACTER
+             ============================== -->
+
+        <div
+            class="aivi"
+            id="aivi">
+
+
+            <!-- HAIR -->
+
+            <div class="hair"></div>
+
+
+            <!-- EARS -->
+
+            <div class="ear left"></div>
+            <div class="ear right"></div>
+
+
+            <!-- HEAD -->
+
+            <div class="head">
+
+
+                <!-- FACE SCREEN -->
+
+                <div
+                    class="face"
+                    id="face">
+
+
+                    <div
+                        class="eye left">
+                    </div>
+
+                    <div
+                        class="eye right">
+                    </div>
+
+
+                    <div
+                        class="blush left">
+                    </div>
+
+                    <div
+                        class="blush right">
+                    </div>
+
+
+                    <div
+                        class="mouth">
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- BODY -->
+
+            <div class="body">
+
+
+                <div class="chest-heart">
+                    ♥
+                </div>
+
+
+                <!-- ARMS -->
+
+                <div class="arm left">
+
+                    <div class="hand"></div>
+
+                </div>
+
+
+                <div class="arm right">
+
+                    <div class="hand"></div>
+
+                </div>
+
+
+                <!-- LEGS -->
+
+                <div class="leg left">
+
+                    <div class="foot"></div>
+
+                </div>
+
+
+                <div class="leg right">
+
+                    <div class="foot"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- DIALOGUE -->
+
+        <div
+            class="dialogue"
+            id="dialogue">
+
+            <h2>
+                Hi Jhinuk! 💗
+            </h2>
+
+            <p id="aiviMessage">
+                I'm AIVI...
+                <br>
+                Your little companion! ✨
+            </p>
+
+        </div>
+
+
+    </main>
+
+</div>
+
+
+<!-- CONTROLS -->
+
+<div class="controls">
+
+    <button
+        class="control"
+        onclick="setExpression('happy')">
+
+        😊
+
+    </button>
+
+
+    <button
+        class="control"
+        onclick="wave()">
+
+        👋
+
+    </button>
+
+
+    <button
+        class="control"
+        onclick="heartPose()">
+
+        💗
+
+    </button>
+
+
+    <button
+        class="control"
+        onclick="dance()">
+
+        💃
+
+    </button>
+
+
+    <button
+        class="control mic"
+        id="talk">
+
+        🎤
+
+    </button>
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   AIVI CHARACTER ENGINE
+   ========================================================= */
+
+const aivi =
+    document.getElementById("aivi");
+
+const face =
+    document.getElementById("face");
+
+const message =
+    document.getElementById("aiviMessage");
+
+
+/* =========================================================
+   BLINKING
+   ========================================================= */
+
+function blink() {
+
+    face.classList.add("blink");
+
+    setTimeout(() => {
+
+        face.classList.remove("blink");
+
+    }, 150);
+
+}
+
+
+/* random natural blinking */
+
+function randomBlink() {
+
+    blink();
+
+    const next =
+        2500 +
+        Math.random() * 4000;
+
+    setTimeout(
+        randomBlink,
+        next
+    );
+}
+
+randomBlink();
+
+
+/* =========================================================
+   EXPRESSIONS
+   ========================================================= */
+
+function setExpression(type) {
+
+    face.className = "face";
+
+    if(type === "happy") {
+
+        face.classList.add("happy");
+
+        message.innerHTML =
+            "Hehehe... 💗<br>" +
+            "I'm happy you're here!";
+
+    }
+
+    if(type === "sad") {
+
+        face.classList.add("sad");
+
+        message.innerHTML =
+            "It's okay... 🥺<br>" +
+            "I'm here with you.";
+
+    }
+
+    if(type === "surprised") {
+
+        face.classList.add("surprised");
+
+        message.innerHTML =
+            "Ohhh?! 😳<br>" +
+            "What happened?!";
+
+    }
+
+}
+
+
+/* =========================================================
+   WAVE
+   ========================================================= */
+
+function wave() {
+
+    aivi.classList.add("wave");
+
+    message.innerHTML =
+        "Hiiiii Jhinuk! 👋💗";
+
+    setTimeout(() => {
+
+        aivi.classList.remove("wave");
+
+    }, 2500);
+
+}
+
+
+/* =========================================================
+   HEART POSE
+   ========================================================= */
+
+function heartPose() {
+
+    aivi.classList.add("heart-pose");
+
+    message.innerHTML =
+        "This one's for you... 💗";
+
+    setTimeout(() => {
+
+        aivi.classList.remove("heart-pose");
+
+    }, 3000);
+
+}
+
+
+/* =========================================================
+   DANCE
+   ========================================================= */
+
+function dance() {
+
+    aivi.classList.add("dance");
+
+    message.innerHTML =
+        "Come onnn! Let's dance! 💃✨";
+
+    setTimeout(() => {
+
+        aivi.classList.remove("dance");
+
+    }, 4000);
+
+}
+
+
+/* =========================================================
+   RANDOM IDLE BEHAVIOUR
+   ========================================================= */
+
+function randomAction() {
+
+    const actions = [
+
+        () => {
+            blink();
+        },
+
+        () => {
+            aivi.classList.add(
+                "ears-wiggle"
+            );
+
+            setTimeout(() => {
+
+                aivi.classList.remove(
+                    "ears-wiggle"
+                );
+
+            }, 1000);
+        },
+
+        () => {
+
+            setExpression("happy");
+
+        },
+
+        () => {
+
+            message.innerHTML =
+                "Jhinuk... I'm still here. 💗";
+
+        }
+
+    ];
+
+
+    const action =
+        actions[
+            Math.floor(
+                Math.random() *
+                actions.length
+            )
+        ];
+
+    action();
+}
+
+
+/* Every 6–10 seconds */
+
+setInterval(
+
+    randomAction,
+
+    7000
+
+);
+
+
+/* =========================================================
+   EASTER EGG
+   ========================================================= */
+
+document.addEventListener(
+    "dblclick",
+    () => {
+
+        aivi.classList.add(
+            "excited"
+        );
+
+        message.innerHTML =
+            "Hehehe! You found me! 💗✨";
+
+        setTimeout(() => {
+
+            aivi.classList.remove(
+                "excited"
+            );
+
+        }, 1800);
+
+    }
+);
+
+</script>
+
+</body>
+</html>
